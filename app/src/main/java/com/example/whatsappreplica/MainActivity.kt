@@ -6,13 +6,28 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -77,5 +92,118 @@ fun SetupNavGraph (navController: NavHostController){
         composable("inicio"){ HomeScreen(navController) }
         composable("chat"){ ChatScreen(navController) }
         composable("novedades"){ NovedadesScreen(navController) }
+    }
+}
+
+@Composable
+fun BottomNavBar(iniElem: Int = 0, navController: NavController) {
+    var selectedItem by remember { mutableStateOf(iniElem) }
+
+    NavigationBar(
+        containerColor = colorResource(id = R.color.WhatsBBackground),
+        contentColor = Color.White
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.MailOutline,
+                    contentDescription = "Chats",
+                    tint = Color.White
+                )
+            },
+            label = {
+                Text(
+                    "Chats",
+                    color = Color.White
+                )
+            },
+            selected = selectedItem == 0,
+            onClick = {
+                selectedItem = 0
+                navController.navigate("inicio")
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.White,  // Color del ícono seleccionado (verde)
+                selectedTextColor = Color.White,  // Color del texto seleccionado (verde)
+                indicatorColor = colorResource(id = R.color.WhatsDarkGreen),  // Color de fondo del ítem seleccionado (verde oscuro)
+                unselectedIconColor = Color.White, // Color del ícono no seleccionado
+                unselectedTextColor = Color.White // Color del texto no seleccionado
+            )
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.CheckCircle,
+                    contentDescription = "Novedades",
+                    tint = Color.White
+                )
+            },
+            label = {
+                Text(
+                    "Novedades",
+                    color = Color.White
+                )
+            },
+            selected = selectedItem == 1,
+            onClick = {
+                selectedItem = 1
+                navController.navigate("novedades")
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.White,
+                selectedTextColor = Color.White,
+                indicatorColor = colorResource(id = R.color.WhatsDarkGreen),
+                unselectedIconColor = Color.White,
+                unselectedTextColor = Color.White
+            )
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "Comunidades",
+                    tint = Color.White
+                )
+            },
+            label = {
+                Text(
+                    "Comunidades",
+                    color = Color.White
+                )
+            },
+            selected = selectedItem == 2,
+            onClick = { selectedItem = 2 },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.White,
+                selectedTextColor = Color.White,
+                indicatorColor = colorResource(id = R.color.WhatsDarkGreen),
+                unselectedIconColor = Color.White,
+                unselectedTextColor = Color.White
+            )
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Filled.Call,
+                    contentDescription = "Llamadas",
+                    tint = Color.White
+                )
+            },
+            label = {
+                Text(
+                    "Llamadas",
+                    color = Color.White
+                )
+            },
+            selected = selectedItem == 3,
+            onClick = { selectedItem = 3 },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.White,
+                selectedTextColor = Color.White,
+                indicatorColor = colorResource(id = R.color.WhatsDarkGreen),
+                unselectedIconColor = Color.White,
+                unselectedTextColor = Color.White
+            )
+        )
     }
 }

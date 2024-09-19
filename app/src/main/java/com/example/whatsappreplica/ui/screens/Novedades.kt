@@ -9,8 +9,9 @@ import androidx.navigation.NavController
 @Composable
 fun NovedadesScreen(navController: NavController){
     Column {
-        Text(text = "This is the HomeScreen")
-        //Button(onClick = {navController.navigate("menu")}) {
-        //}
+        Text(text = "This is novedades")
+        Button(onClick = {navController.navigate("inicio")}) {
+            Text(text = "Inicio")
+        }
     }
 }

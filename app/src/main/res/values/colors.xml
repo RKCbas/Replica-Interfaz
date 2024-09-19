@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="WhatsBBackground">#121B22</color>
+    <color name="WhatsGreen">#FF25D366</color>
+    <color name="WhatsDarkGreen">#FF128C7E</color>
 
 </resources>
