@@ -4,13 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -26,7 +34,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -40,7 +51,7 @@ import com.example.whatsappreplica.ui.theme.WhatsAppReplicaTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
 
         setContent{
             ComposeMultiScreenApp()
@@ -94,6 +105,60 @@ fun SetupNavGraph (navController: NavHostController){
         composable("novedades"){ NovedadesScreen(navController) }
     }
 }
+
+@Preview(showBackground = false)
+@Composable
+fun WHeader(tipo:String = "inicio") {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp)
+            //.border(width = 2.dp, color = Color.Red)
+            .padding(5.dp, 5.dp, 5.dp, 0.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = if(tipo == "novedades") "Novedades" else "WhatsApp",
+            color = Color.White,
+            fontSize = 24.sp
+        )
+        Column {
+            Row {
+                if (tipo=="novedades"){
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_camera),
+                        contentDescription = "Icono de cámara"
+                    )
+                    Icon(
+                        Icons.Filled.Search,
+                        contentDescription = "Buscar",
+                        tint = Color.White,
+                    )
+                    Icon(
+                        Icons.Filled.MoreVert,
+                        contentDescription = "Opciones adicionales",
+                        tint = Color.White,
+                    )
+                }else{
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_camera),
+                        contentDescription = "Icono de cámara"
+                    )
+                    Icon(
+                        Icons.Filled.MoreVert,
+                        contentDescription = "Opciones adicionales",
+                        tint = Color.White,
+                    )
+                }
+
+
+            }
+
+        }
+
+    }
+}
+
 
 @Composable
 fun BottomNavBar(iniElem: Int = 0, navController: NavController) {

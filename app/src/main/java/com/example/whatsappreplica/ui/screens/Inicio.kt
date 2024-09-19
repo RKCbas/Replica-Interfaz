@@ -45,48 +45,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.whatsappreplica.BottomNavBar
 import com.example.whatsappreplica.R
+import com.example.whatsappreplica.WHeader
 
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    PreviewApp(navController)
+    PreviewAppInicio(navController)
 }
 
 
-@Preview(showBackground = false)
-@Composable
-fun WHeader() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp)
-            //.border(width = 2.dp, color = Color.Red)
-            .padding(5.dp, 10.dp, 5.dp, 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = "WhatsApp",
-            color = Color.White,
-            fontSize = 22.sp
-        )
-        Column {
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_camera),
-                    contentDescription = "Icono de cámara"
-                )
-                Icon(
-                    Icons.Filled.MoreVert,
-                    contentDescription = "Opciones adicionales",
-                    tint = Color.White,
-                )
-
-            }
-
-        }
-
-    }
-}
 
 @Preview
 @Composable
@@ -132,7 +99,7 @@ fun SearchBar() {
 }
 
 @Composable
-fun ChatRow(chatTitle: String, navController: NavController) {
+fun ChatRow(chatName: String, chatMessage: String, chatHour: String, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -143,13 +110,7 @@ fun ChatRow(chatTitle: String, navController: NavController) {
         verticalAlignment = Alignment.CenterVertically
 
     ) {
-//        Box(modifier = Modifier){
-//            Text(
-//                text = chatTitle,
-//                color = Color.White,
-//                fontSize = 18.sp,
-//            )
-//        }
+
         Image(
             painter = painterResource(id = R.drawable.perfil),
             contentDescription = "Imagen de perfil",
@@ -169,13 +130,13 @@ fun ChatRow(chatTitle: String, navController: NavController) {
                 modifier = Modifier.padding(top = 5.dp)
             ) {
                 Text(
-                    text = chatTitle,
+                    text = chatName,
                     color = Color.White,
                     fontSize = 18.sp
                 )
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
-                    text = "Mensaje de $chatTitle",
+                    text = chatMessage,
                     color = Color.LightGray,
                     fontSize = 12.sp
                 )
@@ -183,7 +144,7 @@ fun ChatRow(chatTitle: String, navController: NavController) {
             Box(modifier = Modifier.fillMaxHeight()) {
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
-                    text = "12:00",
+                    text = chatHour,
                     color = Color.LightGray
                 )
 
@@ -199,7 +160,7 @@ fun ChatRow(chatTitle: String, navController: NavController) {
 
 //@Preview(showBackground = true)
 @Composable
-fun PreviewApp(navController: NavController) {
+fun PreviewAppInicio(navController: NavController) {
     Scaffold(
         bottomBar = {
             BottomNavBar(0, navController) // Barra de navegación visual
@@ -231,9 +192,25 @@ fun PreviewApp(navController: NavController) {
             ) {
                 item { SearchBar() }
                 item { Spacer(modifier = Modifier.height(15.dp)) }
-                items(15) { index ->
-                    val inde = index + 1
-                    ChatRow("Chat $inde", navController)
+                val datos = arrayOf(
+                    arrayOf("Cbas","Tú: Foto","Ayer"),
+                    arrayOf("Tony Tics","hola","Ayer"),
+                    arrayOf("Alex G","Sticker","Ayer"),
+                    arrayOf("Pa","Reaccionó a \"Claro\"","Ayer"),
+                    arrayOf("Graduación 20-24","Mich: Fiestop","Ayer"),
+                    arrayOf("Smart Fit","¡Hola MARCO SEBASTIAN","Ayer"),
+                    arrayOf("Vivi","Ya casi subo","Ayer"),
+                    arrayOf("Asesorias R EMED","Estimados alumnos","Ayer"),
+                    arrayOf("TDI 2 - Equipo 5","Fernando IND: Ahuevo","Ayer"),
+                    arrayOf("Negocios Electronicos II","Tú: Okay","Ayer"),
+                    arrayOf("Negocios II","Se elimino","Ayer"),
+                    arrayOf("Hora libre","Ruben Tics: Sticker","17/09/24"),
+                    arrayOf("Leo","Creo que si","16/09/24"),
+                    arrayOf("Jared Tics","Vavava","16/09/24"),
+                    arrayOf("Mike ITA","Okay","15/09/24")
+                )
+                items(datos.size) { index ->
+                    ChatRow(datos[index][0],datos[index][1],datos[index][2], navController)
                 }
             }
         }

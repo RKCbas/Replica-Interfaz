@@ -67,5 +67,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
+    // Splash API
+    // Allow us to initate the app with an animation, like a movement entrance
+    //https://developer.android.com/develop/ui/views/launch/splash-screen?hl=es-419
+    implementation("androidx.core:core-splashscreen:1.0.0-beta01") // splash screen
 }
